@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState} from "react"
+import './App.css'
 
-function App() {
+export function App() {
+  const [data, setData] = useState('')
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  const fetchData = async () => {
+    try {
+      const response = await
+  fetch('http://localhost:5000/api')
+      const jsonData = await
+  response.json()
+      setData(jsonData.message);
+    } catch (error) {
+      console.log('error fetching data:', error)
+    }
+  }
+
   return (
-    <div className="App">
+    <div>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Data from Express server:</h1>
+        <p>{data}</p>
       </header>
     </div>
-  );
+  )
 }
-
-export default App;
